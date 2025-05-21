@@ -62,7 +62,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         <label>Price:</label>
         <input type="number" name="price" step="0.01" value="<?php echo $product['price']; ?>" required>
         
-        <input type="submit" value="Update Product">
+        <button type="submit" class="submit_btn">Update Product</button>
     </form>
 </body>
 </html>

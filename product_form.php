@@ -13,6 +13,7 @@ session_start();
     <?php unset($_SESSION['alert']); endif; ?>
 </head>
 <body>
+   
     <div class="heading"><h2>Add New Product</h2></div>
     
     <!-- Product Entry Form -->
@@ -34,19 +35,32 @@ session_start();
         </button>
     </form>
 
-    <!-- View Products Button -->
+    <!-- View Products and Search Form -->
     <form method="GET" style="margin-top: 20px;">
         <button type="submit" name="view_products" class="view-btn">View Products</button>
+        <div class="search-container">
+            <input type="text" name="search" class="searchbox" placeholder="Search products..." 
+                   value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?>">
+            <button type="submit" name="search_btn" class="search_btn">
+                Search
+            </button>
+        </div>
     </form>
 
     <?php
-    // Display products table when View Products is clicked
-    if(isset($_GET['view_products'])) {
+    // Display products table when View Products or Search is clicked
+    if(isset($_GET['view_products']) || isset($_GET['search_btn'])) {
         $conn = new mysqli("localhost", "root", "", "store");
         
         if($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
+         // Search functionality
+        $search_term = "%";
+        if(isset($_GET['search']) && !empty($_GET['search'])) {
+            $search_term = "%" . $_GET['search'] . "%";
+        }
+
 
         // Delete functionality
         if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_id'])) {
@@ -56,7 +70,12 @@ session_start();
             $delete_stmt->close();
         }
 
-        $result = $conn->query("SELECT * FROM products");
+       
+        $sql = "SELECT * FROM products WHERE product_name LIKE ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $search_term);
+        $stmt->execute();
+        $result = $stmt->get_result();
         
         if($result->num_rows > 0) {
             echo '<div class="products-table">
@@ -91,9 +110,13 @@ session_start();
             
             echo '</table></div>';
         } else {
-            echo '<p>No products found in the database.</p>';
+            $message = isset($_GET['search']) ? 
+                "No products found matching '".htmlspecialchars($_GET['search'])."'" : 
+                "No products found in the database.";
+            echo '<p style="text-align:center">'.$message.'</p>';
         }
         
+        $stmt->close();
         $conn->close();
     }
     ?>
