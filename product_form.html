@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Entry Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="heading"><h2>Add New Product</h2></div>
+
+    <form method="POST" action="submit_product.php">
+        <label>Product Name:</label>
+        <input type="text" name="product_name" required><br><br>
+        
+        <label>HSN Code:</label>
+        <input type="text" name="hsncode" required><br><br>
+        
+        <label>Tax (%):</label>
+        <input type="number" name="tax" step="0.01" required><br><br>
+        
+        <label>Price:</label>
+        <input type="number" name="price" step="0.01" required><br><br>
+        
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
