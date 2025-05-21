@@ -48,19 +48,99 @@ form select:focus {
     outline: none;
 }
 
-form button,
-form input[type="submit"] {
-    padding: 10px 0;
-    background: #007bff;
+.submit_btn {
+    background-color:rgb(41, 146, 66);
     color: #fff;
+    padding: 10px 24px;
     border: none;
     border-radius: 4px;
-    font-size: 1rem;
+    font-size: 16px;
     cursor: pointer;
-    transition: background 0.2s;
+    
+}
+.submit_btn:hover {
+    background-color:rgb(0, 0, 0);
+    color: white;
+} 
+
+/* View Button */
+
+
+.view-btn {
+    background: #000000;  
+    color: white !important;  
+    margin: 20px auto;
+    display: block;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  
 }
 
-form button:hover,
-form input[type="submit"]:hover {
-    background: #0056b3;
+.view-btn:hover {
+    background-color:rgb(19, 119, 97); 
+    color: white;
 }
+
+/* Products Table */
+.products-table {
+    margin: 40px auto;
+    max-width: 800px;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+.products-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.products-table th,
+.products-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.products-table th {
+    background-color: #f8f9fa;
+}
+
+/* Action Buttons */
+.actions {
+    display: flex;
+    gap: 8px;
+}
+
+.edit-btn {
+    background: #ffc107;
+    color: black;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.delete-btn {
+    background: #dc3545;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.edit-btn:hover {
+    background: #e0a800;
+}
+
+.delete-btn:hover {
+    background: #c82333;
+}
+
+
+
